@@ -47,6 +47,12 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/health", "/actuator/health/**", "/actuator/info").permitAll()
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/telegram/**").permitAll()
+                        // Static web frontend (src/main/resources/static) - served from the
+                        // same origin as the API, so it needs no CORS config, only its own
+                        // permitAll: it is not under /api/** and would otherwise fall through
+                        // to the denyAll() below. It calls /api/v1/** itself and is subject to
+                        // the same authentication there.
+                        .requestMatchers("/", "/index.html", "/*.js", "/*.css", "/favicon.ico").permitAll()
                         .requestMatchers("/api/v1/**").authenticated()
                         .anyRequest().denyAll())
                 .exceptionHandling(exceptions -> exceptions

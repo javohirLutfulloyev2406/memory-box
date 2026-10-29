@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memory Box</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Memory Box</h1>
+    <p class="tagline">Save a link now, find it later.</p>
+  </header>
+
+  <main class="container">
+    <section class="panel" aria-label="Save a new link">
+      <form id="save-form">
+        <div class="field">
+          <label for="url-input">URL</label>
+          <input id="url-input" name="url" type="url" placeholder="https://example.com/article" required />
+        </div>
+        <div class="field">
+          <label for="note-input">Note (optional)</label>
+          <input id="note-input" name="note" type="text" placeholder="Why you're saving this" maxlength="2000" />
+        </div>
+        <button type="submit" id="save-button">Save</button>
+      </form>
+      <div id="save-status" class="status" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-label="Search saved items">
+      <form id="search-form">
+        <div class="field search-field">
+          <label for="search-input">Search</label>
+          <input id="search-input" name="q" type="search" placeholder="Search your saved items" />
+        </div>
+        <button type="submit">Search</button>
+        <button type="button" id="clear-search-button" class="secondary">Clear</button>
+      </form>
+    </section>
+
+    <section class="panel" aria-label="Saved items">
+      <div class="list-header">
+        <h2 id="list-title">Your saved items</h2>
+        <button type="button" id="refresh-button" class="secondary">Refresh</button>
+      </div>
+      <div id="list-status" class="status" role="status" aria-live="polite"></div>
+      <ul id="item-list" class="item-list"></ul>
+      <div id="load-more-wrap" class="load-more-wrap" hidden>
+        <button type="button" id="load-more-button" class="secondary">Load more</button>
+      </div>
+    </section>
+  </main>
+
+  <template id="item-template">
+    <li class="item" data-id="">
+      <div class="item-main">
+        <a class="item-title" href="#" target="_blank" rel="noopener noreferrer"></a>
+        <span class="badge" hidden></span>
+      </div>
+      <p class="item-description"></p>
+      <p class="item-note"></p>
+      <p class="item-meta"></p>
+      <form class="edit-form" hidden>
+        <input type="text" class="edit-title-input" placeholder="Title" maxlength="500" />
+        <input type="text" class="edit-note-input" placeholder="Note" maxlength="2000" />
+        <div class="edit-actions">
+          <button type="submit" class="save-edit-button">Save changes</button>
+          <button type="button" class="cancel-edit-button secondary">Cancel</button>
+        </div>
+      </form>
+      <div class="item-actions">
+        <button type="button" class="edit-button secondary">Edit</button>
+        <button type="button" class="delete-button danger">Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>
