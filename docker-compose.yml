@@ -3,8 +3,8 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-memorybox}
-      POSTGRES_USER: ${POSTGRES_USER:-memorybox}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-root}
     ports:
       # Host port defaults to 5433, not 5432: many dev machines already run a local
       # PostgreSQL install on 5432, and binding the same host port would silently
@@ -28,8 +28,8 @@ services:
       - "8080:8080"
     environment:
       DATABASE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB:-memorybox}
-      DATABASE_USERNAME: ${POSTGRES_USER:-memorybox}
-      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+      DATABASE_USERNAME: ${POSTGRES_USER:-postgres}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-root}
       DEV_AUTH_ENABLED: ${DEV_AUTH_ENABLED:-false}
       TELEGRAM_BOT_ENABLED: ${TELEGRAM_BOT_ENABLED:-false}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
